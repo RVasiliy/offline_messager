@@ -39,7 +39,7 @@ AppAsset::register($this);
         $menuItems[] = '<li>'
             . Html::beginForm(['/site/logout'], 'post')
             . Html::submitButton(
-                'Выход (' . Yii::$app->user->identity->username . ')',
+                'Выход (' . Yii::$app->user->identity->email . ')',
                 ['class' => 'btn btn-link logout']
             )
             . Html::endForm()
@@ -59,7 +59,7 @@ AppAsset::register($this);
 
 <footer class="footer">
     <div class="container">
-        <p class="pull-left">&copy; Offline messager <?= date('Y') ?></p>
+        <p class="pull-left">&copy; Offline messager, <?= date('Y') ?></p>
     </div>
 </footer>
 <?php $this->endBody(); ?>
