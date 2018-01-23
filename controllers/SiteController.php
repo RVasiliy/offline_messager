@@ -3,6 +3,7 @@
 namespace app\controllers;
 
 use Yii;
+use app\models\LoginForm;
 use app\models\RegisterForm;
 use yii\filters\AccessControl;
 use yii\filters\VerbFilter;
@@ -12,7 +13,7 @@ class SiteController extends Controller {
 
     public function behaviors() {
         return [
-            'access' =>[
+            'access' => [
                 'class' => AccessControl::className(),
                 'only' => ['logout', 'register'],
                 'rules' => [
@@ -28,7 +29,7 @@ class SiteController extends Controller {
                     ],
                 ],
             ],
-            'verbs' =>[
+            'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [
                     'logout' => ['post'],
@@ -36,7 +37,7 @@ class SiteController extends Controller {
             ],
         ];
     }
-    
+
     public function actions() {
         return [
             'error' => [
@@ -67,5 +68,19 @@ class SiteController extends Controller {
         Yii::$app->getUser()->logout();
 
         return $this->goHome();
+    }
+
+    public function actionLogin() {
+        if (!Yii::$app->getUser()->isGuest) {
+            return $this->goHome();
+        }
+
+        $model = new LoginForm();
+
+        if ($model->load(Yii::$app->request->post()) && $model->login()) {
+            return $this->goBack();
+        }
+
+        return $this->render('login', ['model' => $model]);
     }
 }
