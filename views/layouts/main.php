@@ -36,12 +36,13 @@ AppAsset::register($this);
         $menuItems[] = ['label' => 'Регистрация', 'url' => ['/site/register']];
 
     } else {
+        $menuItems[] = ['label' => Yii::$app->user->identity->email, 'items' => [
+            ['label' => 'Профиль', 'url' => ['/profile/index']],
+        ]];
+
         $menuItems[] = '<li>'
             . Html::beginForm(['/site/logout'], 'post')
-            . Html::submitButton(
-                'Выход (' . Yii::$app->user->identity->email . ')',
-                ['class' => 'btn btn-link logout']
-            )
+            . Html::submitButton('Выход', ['class' => 'btn btn-link logout'])
             . Html::endForm()
             . '</li>';
     }

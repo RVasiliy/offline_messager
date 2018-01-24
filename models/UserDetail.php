@@ -3,6 +3,7 @@
 namespace app\models;
 
 
+use Yii;
 use yii\db\ActiveRecord;
 
 class UserDetail extends ActiveRecord {
@@ -12,6 +13,19 @@ class UserDetail extends ActiveRecord {
     const INT_TYPE = 'integer';
     const STRING_TYPE = 'string';
     const TIMESTAMP_TYPE = 'timestamp';
+
+    public static function createModel($userId, $paramName) {
+        $model = self::findOne(['user_id' => $userId, 'param_name' => $paramName]);
+
+        if (!$model) {
+            $model = new self();
+            $model->user_id = $userId;
+            $model->param_name = $paramName;
+            $model->param_type = self::STRING_TYPE;
+        }
+
+        return $model;
+    }
 
     public static function tableName() {
         return '{{%user_detail}}';
@@ -71,5 +85,13 @@ class UserDetail extends ActiveRecord {
             default:
                 break;
         }
+    }
+
+    public static function findByName($paramName, $userId = 0) {
+        if ($userId) {
+            $userId = Yii::$app->user->identity->getId();
+        }
+
+        return static::findOne(['user_id' => $userId, 'param_name' => $paramName]);
     }
 }
