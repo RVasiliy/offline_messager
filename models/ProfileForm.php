@@ -51,6 +51,17 @@ class ProfileForm extends Model {
         $userDetail = UserDetail::createModel($user->id, 'nickname');
         $userDetail->param_value = $this->nickname;
 
+        if ($this->password) {
+            $this->updatePassword($this->password);
+        }
+
         return $userDetail->save();
+    }
+
+    protected function updatePassword($password) {
+        $user = Yii::$app->getUser()->identity;
+
+        $user->setPassword($password);
+        $user->save();
     }
 }
