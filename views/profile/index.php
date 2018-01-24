@@ -1,6 +1,5 @@
 <?php
 
-use yii\bootstrap\ActiveForm;
 use yii\helpers\Html;
 
 $this->title = 'Профиль';
@@ -10,17 +9,34 @@ $this->title = 'Профиль';
 
     <div class="row">
         <div class="col-lg-12">
-            <?php $form = ActiveForm::begin(['id' => 'form-profile']); ?>
+            <table class="table table-striped">
+                <tr>
+                    <th>Имя</th>
+                    <td><?= $model->nickname; ?></td>
+                </tr>
+                <tr>
+                    <th>Статус</th>
+                    <td></td>
+                </tr>
+                <tr>
+                    <th>Контакты</th>
+                    <td></td>
+                </tr>
+                <tr>
+                    <th>Входящие сообщения</th>
+                    <td></td>
+                </tr>
+                <tr>
+                    <th>Исходящие сообщения</th>
+                    <td></td>
+                </tr>
+            </table>
+        </div>
+    </div>
 
-            <?= $form->field($model, 'nickname')->textInput(); ?>
-            <?= $form->field($model, 'password')->passwordInput(); ?>
-            <?= $form->field($model, 'password_repeat')->passwordInput(); ?>
-
-            <div class="form-group">
-                <?= Html::submitButton('Сохранить', ['class' => 'btn btn-primary']) ?>
-            </div>
-
-            <?php ActiveForm::end(); ?>
+    <div class="row">
+        <div class="col-lg-12">
+            <?= Html::a('Редактировать профиль', ['profile/update'], ['class' => 'btn btn-primary']); ?>
         </div>
     </div>
 </div>
