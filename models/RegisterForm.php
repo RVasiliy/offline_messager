@@ -48,6 +48,17 @@ class RegisterForm extends Model {
         $user->setPassword($this->password);
         $user->generateAuthKey();
 
-        return $user->save() ? $user : null;
+        if ($user->save()) {
+            $userDetail = new UserDetail();
+            $userDetail->user_id = $user->getId();
+            $userDetail->param_name = 'nickname';
+            $userDetail->param_value = $this->nickname;
+            $userDetail->param_type = UserDetail::STRING_TYPE;
+            $userDetail->save();
+
+            return $user;
+        }
+
+        return null;
     }
 }

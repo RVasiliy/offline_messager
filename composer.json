@@ -1,6 +1,10 @@
 {
     "name": "rvasiliy/messager",
     "description": "Test application for messaging",
+    "type": "project",
+    "support": {
+        "source": "https://github.com/RVasiliy/offline_messager.git"
+    },
     "authors": [
         {
             "name": "RVasiliy",
