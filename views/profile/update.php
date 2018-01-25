@@ -18,6 +18,7 @@ $this->title = 'Редактирование профиля';
 
             <div class="form-group">
                 <?= Html::submitButton('Сохранить', ['class' => 'btn btn-primary']) ?>
+                <?= Html::a('Отмена', ['profile/index'], ['class' => 'btn btn-default']) ?>
             </div>
 
             <?php ActiveForm::end(); ?>
