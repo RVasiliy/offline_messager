@@ -17,7 +17,7 @@ $this->title = 'Профиль';
                 <tr>
                     <th>Контакты</th>
                     <td>
-                        <!-- todo вставить кнопку "Перейти" -->
+                        <?= Html::a('Перейти', ['recipient/index'], ['class' => 'btn btn-primary']); ?>
                     </td>
                 </tr>
                 <tr>

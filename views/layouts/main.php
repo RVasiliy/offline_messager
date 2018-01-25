@@ -34,10 +34,12 @@ AppAsset::register($this);
     if (Yii::$app->user->isGuest) {
         $menuItems[] = ['label' => 'Вход', 'url' => ['/site/login']];
         $menuItems[] = ['label' => 'Регистрация', 'url' => ['/site/register']];
+        $menuItems[] = ['label' => 'Контакты', 'url' => ['/recipient/index']];
 
     } else {
         $menuItems[] = ['label' => Yii::$app->user->identity->email, 'items' => [
             ['label' => 'Профиль', 'url' => ['/profile/index']],
+            ['label' => 'Контакты', 'url' => ['/recipient/index']],
         ]];
 
         $menuItems[] = '<li>'
