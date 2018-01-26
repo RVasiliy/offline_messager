@@ -3,7 +3,9 @@
 namespace app\controllers;
 
 
+use Yii;
 use app\models\User;
+use app\models\UserMessage;
 use yii\filters\AccessControl;
 use yii\web\Controller;
 
@@ -29,6 +31,14 @@ class MessageController extends Controller {
             ->where(['id' => $recipient_id])
             ->one();
 
-        return $this->render('view', ['recipient' => $recipient]);
+        $messages = UserMessage::find()
+            ->where([
+                'user_id' => [Yii::$app->user->id, $recipient_id]
+            ]);
+
+        return $this->render('view', [
+            'recipient' => $recipient,
+            'messages' => $messages,
+        ]);
     }
 }
