@@ -1,6 +1,8 @@
 <?php
 
+use yii\bootstrap\ActiveForm;
 use yii\helpers\Html;
+use yii\helpers\Url;
 
 $this->title = 'Переписка c ' . $recipient->detail->nickname;
 ?>
@@ -46,8 +48,24 @@ $this->title = 'Переписка c ' . $recipient->detail->nickname;
     </div>
 
     <div class="row">
-        <div class="col-lg-12">
+        <?php $form = ActiveForm::begin([
+            'id' => 'form-message',
+            'action' => Url::to(['message/add']),
+            'fieldConfig' => [
+                'template' => "{beginWrapper}\n{input}\n{hint}\n{error}\n{endWrapper}",
+            ],
+        ]); ?>
 
+        <div class="col-lg-10">
+            <?= $form->field($model, 'userId')->hiddenInput(['value' => Yii::$app->user->id]); ?>
+            <?= $form->field($model, 'recipientId')->hiddenInput(['value' => $recipient->id]); ?>
+            <?= $form->field($model, 'message')->textarea(['autofocus' => true]); ?>
         </div>
+
+        <div class="col-lg-2 media-middle">
+            <?= Html::submitButton('Отправить', ['class' => 'btn btn-block btn-primary']) ?>
+        </div>
+
+        <?php ActiveForm::end(); ?>
     </div>
 </div>
