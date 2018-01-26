@@ -35,7 +35,7 @@ class ProfileController extends Controller {
         $model = new ProfileForm();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-           return $this->goBack(['profile/index']);
+           return $this->redirect(['profile/index']);
         }
 
         return $this->render('update', ['model' => $model]);
