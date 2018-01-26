@@ -20,7 +20,7 @@ class Profile extends Model {
             $paramName = $userDetail->param_name;
             $paramValue = $userDetail->param_value;
 
-            if (property_exists(self::className(), $paramName)) {
+            if (property_exists($this, $paramName)) {
                 $this->$paramName = $paramValue;
             }
         }

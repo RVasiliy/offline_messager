@@ -12,6 +12,7 @@ use yii\grid\ActionColumn;
 use yii\grid\GridView;
 use yii\grid\SerialColumn;
 use yii\helpers\Html;
+use yii\helpers\Url;
 
 /**
  * Список пользователей системы
@@ -34,17 +35,13 @@ class RecipientsWidget extends Widget {
                 [
                     'label' => 'Имя',
                     'content' => function ($model) {
-                        foreach ($model->details as $detail) {
-                            if ('nickname' === $detail->param_name) {
-                                return $detail->param_value;
-                            }
-                        }
+                        return $model->detail->nickname;
                     }
                 ],
                 'email',
                 [
                     'class' => ActionColumn::className(),
-                    'template' => '{add} {send} {delete}',
+                    'template' => '{add} {message} {delete}',
                     'buttons' => [
                         'add' => function ($url) {
                             $options = [
@@ -57,7 +54,7 @@ class RecipientsWidget extends Widget {
 
                             return Html::a($icon, $url, $options);
                         },
-                        'send' => function ($url) {
+                        'message' => function ($url, $model) {
                             $options = [
                                 'title' => 'Написать',
                                 'aria-label' => 'Написать',
@@ -66,7 +63,7 @@ class RecipientsWidget extends Widget {
 
                             $icon = Html::tag('span', '', ['class' => 'glyphicon glyphicon-pencil']);
 
-                            return Html::a($icon, $url, $options);
+                            return Html::a($icon, Url::to(['message/view', 'recipient_id' => $model->id]), $options);
                         },
                     ],
                     'visibleButtons' => [
@@ -75,7 +72,7 @@ class RecipientsWidget extends Widget {
 
                             return !$user->isGuest && !$this->isRecipient($user, $model);
                         },
-                        'send' => function ($model) {
+                        'message' => function ($model) {
                             $user = Yii::$app->user;
 
                             return !$user->isGuest && $this->isRecipient($user, $model);
