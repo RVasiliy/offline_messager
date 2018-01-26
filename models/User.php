@@ -72,4 +72,8 @@ class User extends ActiveRecord implements IdentityInterface {
     public function getDetails() {
         return $this->hasMany(UserDetail::className(), ['user_id' => 'id']);
     }
+
+    public function getRecipients() {
+        return $this->hasMany(UserRecipient::className(), ['user_id' => 'id']);
+    }
 }

@@ -37,4 +37,14 @@ class RecipientController extends Controller {
 
         return $this->redirect(['recipient/index']);
     }
+
+    public function actionDelete($id) {
+
+        UserRecipient::deleteAll([
+            'user_id' => Yii::$app->user->id,
+            'recipient_id' => $id,
+        ]);
+
+        return $this->redirect(['recipient/index']);
+    }
 }

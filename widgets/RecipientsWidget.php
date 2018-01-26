@@ -4,6 +4,7 @@ namespace app\widgets;
 
 
 use app\models\User;
+use app\models\UserRecipient;
 use Yii;
 use yii\base\Widget;
 use yii\data\ActiveDataProvider;
@@ -43,7 +44,7 @@ class RecipientsWidget extends Widget {
                 'email',
                 [
                     'class' => ActionColumn::className(),
-                    'template' => '{add} {send}',
+                    'template' => '{add} {send} {delete}',
                     'buttons' => [
                         'add' => function ($url) {
                             $options = [
@@ -69,8 +70,21 @@ class RecipientsWidget extends Widget {
                         },
                     ],
                     'visibleButtons' => [
-                        'add' => !Yii::$app->user->isGuest,
-                        'send' => !Yii::$app->user->isGuest,
+                        'add' => function ($model) {
+                            $user = Yii::$app->user;
+
+                            return !$user->isGuest && !$this->isRecipient($user, $model);
+                        },
+                        'send' => function ($model) {
+                            $user = Yii::$app->user;
+
+                            return !$user->isGuest && $this->isRecipient($user, $model);
+                        },
+                        'delete' => function ($model) {
+                            $user = Yii::$app->user;
+
+                            return !$user->isGuest && $this->isRecipient($user, $model);
+                        },
                     ],
                 ],
             ],
@@ -83,7 +97,14 @@ class RecipientsWidget extends Widget {
         return new ActiveDataProvider([
             'query' => User::find()
                 ->select(['id', 'email'])
-                ->where('id <> ' . $userId),
+                ->where(['<>', 'id', $userId]),
         ]);
+    }
+
+    private function isRecipient($user, $candidate) {
+        return boolval(UserRecipient::findOne([
+            'user_id' => $user->id,
+            'recipient_id' => $candidate->id
+        ]));
     }
 }
