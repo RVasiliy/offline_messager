@@ -14,6 +14,12 @@ class User extends ActiveRecord implements IdentityInterface {
     const STATUS_DELETED = 0;
     const STATUS_ACTIVE = 10;
 
+    private $_userDetailDecorator;
+
+    public function init() {
+        $this->_userDetailDecorator = new UserDetailDecorator($this);
+    }
+
     public static function tableName() {
         return '{{%user}}';
     }
@@ -67,6 +73,10 @@ class User extends ActiveRecord implements IdentityInterface {
 
     public function setPassword($password) {
         $this->password_hash = Yii::$app->security->generatePasswordHash($password);
+    }
+
+    public function getDetail() {
+        return $this->_userDetailDecorator;
     }
 
     public function getDetails() {
