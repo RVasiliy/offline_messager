@@ -1,16 +1,16 @@
 <?php
 
-use app\widgets\InboxWidget;
+use app\widgets\OutboxWidget;
 use yii\helpers\Html;
 
-$this->title = 'Входящие сообщения';
+$this->title = 'Исходящие сообщения';
 ?>
-<div class="message-inbox">
+<div class="message-outbox">
     <h1><?= Html::encode($this->title); ?></h1>
 
     <div class="row">
         <div class="col-lg-12">
-            <?= InboxWidget::widget(); ?>
+            <?= OutboxWidget::widget(); ?>
         </div>
     </div>
 </div>

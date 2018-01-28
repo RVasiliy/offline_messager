@@ -116,4 +116,13 @@ class MessageController extends Controller {
     public function actionInbox() {
         return $this->render('inbox');
     }
+
+    /**
+     * Действие для просмотра исходящих сообщений
+     *
+     * @return string
+     */
+    public function actionOutbox() {
+        return $this->render('outbox');
+    }
 }

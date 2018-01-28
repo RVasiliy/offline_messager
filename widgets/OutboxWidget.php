@@ -4,7 +4,6 @@ namespace app\widgets;
 
 
 use app\models\UserMessage;
-use Yii;
 use yii\base\Widget;
 use yii\data\ActiveDataProvider;
 use yii\grid\ActionColumn;
@@ -14,11 +13,11 @@ use yii\helpers\Html;
 use yii\helpers\Url;
 
 /**
- * Список пользователей, приславших сообщения
+ * Список пользователей, кому были посланы сообщения
  *
  * @package app\widgets
  */
-class InboxWidget extends Widget {
+class OutboxWidget extends Widget {
     public function run() {
         return GridView::widget([
             'dataProvider' => $this->getDataProvider(),
@@ -31,13 +30,13 @@ class InboxWidget extends Widget {
                 [
                     'label' => 'Имя',
                     'content' => function ($model) {
-                        return $model->owner->detail->nickname;
+                        return $model->recipient->detail->nickname;
                     },
                 ],
                 [
                     'label' => 'Email',
                     'content' => function ($model) {
-                        return $model->owner->email;
+                        return $model->recipient->email;
                     },
                 ],
                 [
@@ -53,7 +52,7 @@ class InboxWidget extends Widget {
 
                             $icon = Html::tag('span', '', ['class' => 'glyphicon glyphicon-pencil']);
 
-                            return Html::a($icon, Url::to(['message/view', 'recipient_id' => $model->user_id]), $options);
+                            return Html::a($icon, Url::to(['message/view', 'recipient_id' => $model->recipient_id]), $options);
                         },
                     ],
                 ],
@@ -65,7 +64,7 @@ class InboxWidget extends Widget {
         $query = UserMessage::find()
             ->distinct()
             ->select(['user_id', 'recipient_id'])
-            ->where(['recipient_id' => \Yii::$app->user->id]);
+            ->where(['user_id' => \Yii::$app->user->id]);
 
         return new ActiveDataProvider([
             'query' => $query,

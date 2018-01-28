@@ -44,6 +44,7 @@ AppAsset::register($this);
                 'label' => 'Сообщения', 'url' => ['/message/index'],
                 'items' => [
                     ['label' => 'Входящие', 'url' => ['/message/inbox']],
+                    ['label' => 'Исходящие', 'url' => ['/message/outbox']],
                 ],
             ],
         ]];

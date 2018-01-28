@@ -38,4 +38,8 @@ class UserMessage extends ActiveRecord {
     public function getOwner() {
         return $this->hasOne(User::className(), ['id' => 'user_id']);
     }
+
+    public function getRecipient() {
+        return $this->hasOne(User::className(), ['id' => 'recipient_id']);
+    }
 }

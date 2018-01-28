@@ -16,11 +16,7 @@ $this->title = 'Мои сообщения';
                 </tr>
                 <tr>
                     <th>Исходящие</th>
-                    <td></td>
-                </tr>
-                <tr>
-                    <th>Новые</th>
-                    <td></td>
+                    <td><?= Html::a('Смотреть', ['message/outbox'], ['class' => 'btn btn-primary']); ?></td>
                 </tr>
             </table>
         </div>
