@@ -40,7 +40,12 @@ AppAsset::register($this);
         $menuItems[] = ['label' => Yii::$app->user->identity->email, 'items' => [
             ['label' => 'Профиль', 'url' => ['/profile/index']],
             ['label' => 'Контакты', 'url' => ['/recipient/index']],
-            ['label' => 'Сообщения', 'url' => ['/message/index']],
+            [
+                'label' => 'Сообщения', 'url' => ['/message/index'],
+                'items' => [
+                    ['label' => 'Входящие', 'url' => ['/message/inbox']],
+                ],
+            ],
         ]];
 
         $menuItems[] = '<li>'

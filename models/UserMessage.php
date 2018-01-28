@@ -34,4 +34,8 @@ class UserMessage extends ActiveRecord {
             ['is_read', 'boolean'],
         ];
     }
+
+    public function getOwner() {
+        return $this->hasOne(User::className(), ['id' => 'user_id']);
+    }
 }

@@ -25,7 +25,6 @@ class RecipientsWidget extends Widget {
     public function run() {
         return GridView::widget([
             'dataProvider' => $this->getDataProvider(),
-            'caption' => 'Потенциальные получатели',
             'layout' => "{items}\n{pager}",
             'columns' => [
                 [

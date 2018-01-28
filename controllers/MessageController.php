@@ -107,4 +107,13 @@ class MessageController extends Controller {
 
         return $this->asJson($messages->all());
     }
+
+    /**
+     * Действие для просмотра входящих сообщений
+     *
+     * @return string
+     */
+    public function actionInbox() {
+        return $this->render('inbox');
+    }
 }
