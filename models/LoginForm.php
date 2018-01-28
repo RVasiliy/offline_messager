@@ -5,6 +5,11 @@ namespace app\models;
 use Yii;
 use yii\base\Model;
 
+/**
+ * Форма аутентификации
+ *
+ * @package app\models
+ */
 class LoginForm extends Model {
     private $_user;
 

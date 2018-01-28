@@ -6,6 +6,11 @@ namespace app\models;
 use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveRecord;
 
+/**
+ * Модель сообщений от пользователей
+ *
+ * @package app\models
+ */
 class UserMessage extends ActiveRecord {
 
     public static function tableName() {

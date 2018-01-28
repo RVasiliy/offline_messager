@@ -9,6 +9,11 @@ use Yii;
 use yii\filters\AccessControl;
 use yii\web\Controller;
 
+/**
+ * Контроллер профиля пользователя
+ *
+ * @package app\controllers
+ */
 class ProfileController extends Controller {
 
     public function behaviors() {

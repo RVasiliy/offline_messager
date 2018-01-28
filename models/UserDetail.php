@@ -6,6 +6,11 @@ namespace app\models;
 use Yii;
 use yii\db\ActiveRecord;
 
+/**
+ * Модель дополнительной информации о пользователе
+ *
+ * @package app\models
+ */
 class UserDetail extends ActiveRecord {
 
     const DATE_TYPE = 'date';

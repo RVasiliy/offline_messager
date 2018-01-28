@@ -8,6 +8,11 @@ use Yii;
 use yii\filters\AccessControl;
 use yii\web\Controller;
 
+/**
+ * Контроллер для управления получателями (добавление/удаление)
+ *
+ * @package app\controllers
+ */
 class RecipientController extends Controller {
 
     public function behaviors() {

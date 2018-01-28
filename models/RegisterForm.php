@@ -5,6 +5,11 @@ namespace app\models;
 
 use yii\base\Model;
 
+/**
+ * Форма регистрации
+ *
+ * @package app\models
+ */
 class RegisterForm extends Model {
     public $nickname;
     public $email;

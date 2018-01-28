@@ -6,6 +6,11 @@ namespace app\models;
 use Yii;
 use yii\base\Model;
 
+/**
+ * Форма редактирования профиля
+ *
+ * @package app\models
+ */
 class ProfileForm extends Model {
     public $nickname;
     public $password;

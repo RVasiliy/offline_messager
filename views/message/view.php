@@ -12,37 +12,11 @@ $this->title = 'Переписка c ' . $recipient->detail->nickname;
     <div class="row">
         <div class="col-lg-12">
 
-            <?php foreach ($messages->each() as $message): ?>
-                <?php if ($message->user_id === Yii::$app->user->id) { ?>
-                    <div class="row">
-                        <div class="col-lg-10">
-                            <div class="alert alert-success">
-                                <p class="text-left">
-                                    <strong>Я, [<?= Yii::$app->formatter->asDatetime($message->created_at, 'short'); ?>
-                                        ]</strong>
-                                </p>
-
-                                <p><?= $message->message; ?></p>
-                            </div>
-                        </div>
-                    </div>
-                <?php } else { ?>
-                    <div class="row">
-                        <div class="col-lg-10 col-lg-offset-2">
-                            <div class="alert alert-info">
-                                <p class="text-right">
-                                    <strong>
-                                        <?= $recipient->detail->nickname; ?>,
-                                        [<?= Yii::$app->formatter->asDatetime($message->created_at, 'short'); ?>]
-                                    </strong>
-                                </p>
-
-                                <p><?= $message->message; ?></p>
-                            </div>
-                        </div>
-                    </div>
-                <?php } ?>
-            <?php endforeach; ?>
+            <div class="message-list-wrap">
+                <div class="message-list-scroller">
+                    <div id="message-list"></div>
+                </div>
+            </div>
 
         </div>
     </div>
@@ -63,9 +37,18 @@ $this->title = 'Переписка c ' . $recipient->detail->nickname;
         </div>
 
         <div class="col-lg-2 media-middle">
-            <?= Html::submitButton('Отправить', ['class' => 'btn btn-block btn-primary']) ?>
+            <?= Html::submitButton('Отправить', ['class' => 'btn btn-block btn-primary']); ?>
         </div>
 
         <?php ActiveForm::end(); ?>
     </div>
+
+    <script>
+        var MESSAGE_PARAMS = {
+            owner_id: <?= Yii::$app->user->id; ?>,
+            owner_name: '<?= Yii::$app->user->identity->detail->nickname; ?>',
+            recipient_id: <?= $recipient->id; ?>,
+            recipient_name: '<?= $recipient->detail->nickname; ?>'
+        };
+    </script>
 </div>

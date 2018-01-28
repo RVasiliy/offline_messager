@@ -9,6 +9,11 @@ use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveRecord;
 use yii\web\IdentityInterface;
 
+/**
+ * Модель пользователя
+ *
+ * @package app\models
+ */
 class User extends ActiveRecord implements IdentityInterface {
 
     const STATUS_DELETED = 0;

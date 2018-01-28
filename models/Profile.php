@@ -6,6 +6,11 @@ namespace app\models;
 use Yii;
 use yii\base\Model;
 
+/**
+ * Модель для вывода дополнительных данных о пользователе на странице профиля
+ *
+ * @package app\models
+ */
 class Profile extends Model {
     public $nickname;
 

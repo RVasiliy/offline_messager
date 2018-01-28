@@ -3,6 +3,12 @@
 namespace app\models;
 
 
+/**
+ * Вспомогательная модель для получения дополнительных данных о пользователе.
+ * Используется в модели User ($user->detail->$param_name).
+ *
+ * @package app\models
+ */
 class UserDetailDecorator {
     private $_user;
     private $_cache = [];

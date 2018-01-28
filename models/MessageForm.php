@@ -5,6 +5,11 @@ namespace app\models;
 
 use yii\base\Model;
 
+/**
+ * Форма для отправки нового сообщения в чат
+ *
+ * @package app\models
+ */
 class MessageForm extends Model {
     public $userId;
     public $recipientId;

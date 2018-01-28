@@ -5,6 +5,11 @@ namespace app\models;
 
 use yii\db\ActiveRecord;
 
+/**
+ * Модель связи пользователей с добавленными ими получателями
+ *
+ * @package app\models
+ */
 class UserRecipient extends ActiveRecord {
 
     public static function tableName() {
