@@ -23,7 +23,7 @@ $this->title = 'Профиль';
                 <tr>
                     <th>Переписка</th>
                     <td>
-                        <!-- todo вставить кнопку "Перейти" -->
+                        <?= Html::a('Перейти', ['message/index'], ['class' => 'btn btn-primary']); ?>
                     </td>
                 </tr>
             </table>
