@@ -102,6 +102,7 @@ class MessageController extends Controller {
         $messages = UserMessage::find()
             ->where([
                 'user_id' => [Yii::$app->user->id, $recipient_id],
+                'recipient_id' => [Yii::$app->user->id, $recipient_id],
             ])
             ->andWhere(['>', 'id', $last_id]);
 

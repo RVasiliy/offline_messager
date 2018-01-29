@@ -39,8 +39,8 @@ MessageFormAsset::register($this);
             <?= $form->field($model, 'message')->textarea(['autofocus' => true]); ?>
         </div>
 
-        <div class="col-lg-2 media-middle">
-            <?= Html::submitButton('Отправить', ['class' => 'btn btn-block btn-primary']); ?>
+        <div class="col-lg-2">
+            <?= Html::submitButton('Отправить', ['class' => 'btn btn-block btn-primary', 'style' => 'margin-top:20px']); ?>
         </div>
 
         <?php ActiveForm::end(); ?>
