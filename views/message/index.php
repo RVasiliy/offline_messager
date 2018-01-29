@@ -14,7 +14,10 @@ $this->title = 'Мои сообщения';
                 <tr>
                     <th>Входящие</th>
                     <td>
-                        Новые: <?= UserMessage::find()->where(['recipient_id' => Yii::$app->user->id])->count(); ?>
+                        Новые: <?= UserMessage::find()->where([
+                            'recipient_id' => Yii::$app->user->id,
+                            'is_read' => false
+                        ])->count(); ?>
                     </td>
                     <td>
                         <?= Html::a('Смотреть', ['message/inbox'], ['class' => 'btn btn-primary']); ?>

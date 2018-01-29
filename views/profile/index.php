@@ -26,7 +26,10 @@ $this->title = 'Профиль';
                 <tr>
                     <th>Переписка</th>
                     <td>
-                        Новых: <?= UserMessage::find()->where(['recipient_id' => Yii::$app->user->id])->count(); ?>
+                        Новых: <?= UserMessage::find()->where([
+                            'recipient_id' => Yii::$app->user->id,
+                            'is_read' => false,
+                        ])->count(); ?>
                     </td>
                     <td>
                         <?= Html::a('Перейти', ['message/index'], ['class' => 'btn btn-primary']); ?>

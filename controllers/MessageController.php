@@ -34,6 +34,7 @@ class MessageController extends Controller {
                 'actions' => [
                     'add' => ['post'],
                     'get' => ['post'],
+                    'viewed' => ['post'],
                 ],
             ],
         ];
@@ -125,5 +126,12 @@ class MessageController extends Controller {
      */
     public function actionOutbox() {
         return $this->render('outbox');
+    }
+
+    public function actionViewed() {
+        $post = Yii::$app->request->post();
+        $id = intval($post['id']);
+
+        return UserMessage::updateAll(['is_read' => true], ['id' => $id]);
     }
 }

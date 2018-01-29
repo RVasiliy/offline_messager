@@ -33,13 +33,22 @@ class InboxWidget extends Widget {
                     'label' => 'Имя',
                     'content' => function ($model) {
                         $owner = $model->owner;
-                        $isOnline = '<span class="status offline"></span>';
+                        $isOnline = '';
+                        $hasMesages = '';
 
                         if (UserOnline::isUserOnline($owner->id)) {
-                            $isOnline = '<span class="status online"></span>';
+                            $isOnline = '<span class="glyphicon glyphicon-globe"></span> ';
                         }
 
-                        return $isOnline . $owner->detail->nickname;
+                        if (UserMessage::find()->where([
+                            'user_id' => $owner->id,
+                            'recipient_id' => Yii::$app->user->id,
+                            'is_read' => false
+                        ])->count()) {
+                            $hasMesages = '<span class="glyphicon glyphicon-envelope"></span> ';
+                        }
+
+                        return $isOnline . $hasMesages . $owner->detail->nickname;
                     },
                 ],
                 [

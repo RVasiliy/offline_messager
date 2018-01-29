@@ -10,6 +10,31 @@
             messageList.trigger('message:get');
         }, INTERVAL);
 
+        messageList.on('message:get', function () {
+            var scrollerHeight = messageScroller.height();
+            var scrollTop = messageScroller.scrollTop();
+
+            messageList.find('div[data-id]').each(function () {
+                var item = $(this);
+                var offsetTop = this.offsetTop;
+
+                if ((offsetTop - scrollTop) <= scrollerHeight) {
+                    $.ajax({
+                        url: '/message/viewed',
+                        method: 'post',
+                        data: {
+                            id: item.data('id')
+                        },
+                        success: function (response) {
+                            if (0 < response) {
+                                item.removeAttr('data-id');
+                            }
+                        }
+                    });
+                }
+            });
+        });
+
         messageList.on('message:sent', function () {
             messageList.trigger('message:get');
         });
@@ -55,6 +80,10 @@
 
         function renderMessage(model) {
             var item = $('<div>');
+
+            if (!model.is_read) {
+                item.attr('data-id', model.id);
+            }
 
             item.addClass('message');
 

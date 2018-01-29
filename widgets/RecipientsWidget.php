@@ -4,6 +4,7 @@ namespace app\widgets;
 
 
 use app\models\User;
+use app\models\UserMessage;
 use app\models\UserOnline;
 use app\models\UserRecipient;
 use Yii;
@@ -35,13 +36,22 @@ class RecipientsWidget extends Widget {
                 [
                     'label' => 'Имя',
                     'content' => function ($model) {
-                        $isOnline = '<span class="status offline"></span>';
+                        $isOnline = '';
+                        $hasMesages = '';
 
                         if (UserOnline::isUserOnline($model->id)) {
-                            $isOnline = '<span class="status online"></span>';
+                            $isOnline = '<span class="glyphicon glyphicon-globe"></span> ';
                         }
 
-                        return $isOnline . $model->detail->nickname;
+                        if (UserMessage::find()->where([
+                            'user_id' => $model->id,
+                            'recipient_id' => Yii::$app->user->id,
+                            'is_read' => false
+                        ])->count()) {
+                            $hasMesages = '<span class="glyphicon glyphicon-envelope"></span> ';
+                        }
+
+                        return $isOnline . $hasMesages . $model->detail->nickname;
                     }
                 ],
                 'email',

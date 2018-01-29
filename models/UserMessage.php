@@ -32,6 +32,7 @@ class UserMessage extends ActiveRecord {
             [['user_id', 'recipient_id'], 'integer'],
             ['message', 'string'],
             ['is_read', 'boolean'],
+            ['is_read', 'default', 'value' => false],
         ];
     }
 
