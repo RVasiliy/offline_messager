@@ -1,5 +1,6 @@
 <?php
 
+use app\models\UserMessage;
 use yii\helpers\Html;
 
 $this->title = 'Профиль';
@@ -13,15 +14,20 @@ $this->title = 'Профиль';
                 <tr>
                     <th>Имя</th>
                     <td><?= $model->nickname; ?></td>
+                    <td></td>
                 </tr>
                 <tr>
                     <th>Контакты</th>
+                    <td></td>
                     <td>
                         <?= Html::a('Перейти', ['recipient/index'], ['class' => 'btn btn-primary']); ?>
                     </td>
                 </tr>
                 <tr>
                     <th>Переписка</th>
+                    <td>
+                        Новых: <?= UserMessage::find()->where(['recipient_id' => Yii::$app->user->id])->count(); ?>
+                    </td>
                     <td>
                         <?= Html::a('Перейти', ['message/index'], ['class' => 'btn btn-primary']); ?>
                     </td>

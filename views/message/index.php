@@ -1,5 +1,6 @@
 <?php
 
+use app\models\UserMessage;
 use yii\helpers\Html;
 
 $this->title = 'Мои сообщения';
@@ -12,10 +13,16 @@ $this->title = 'Мои сообщения';
             <table class="table table-striped">
                 <tr>
                     <th>Входящие</th>
-                    <td><?= Html::a('Смотреть', ['message/inbox'], ['class' => 'btn btn-primary']); ?></td>
+                    <td>
+                        Новые: <?= UserMessage::find()->where(['recipient_id' => Yii::$app->user->id])->count(); ?>
+                    </td>
+                    <td>
+                        <?= Html::a('Смотреть', ['message/inbox'], ['class' => 'btn btn-primary']); ?>
+                    </td>
                 </tr>
                 <tr>
                     <th>Исходящие</th>
+                    <td></td>
                     <td><?= Html::a('Смотреть', ['message/outbox'], ['class' => 'btn btn-primary']); ?></td>
                 </tr>
             </table>
