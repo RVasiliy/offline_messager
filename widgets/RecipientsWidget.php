@@ -4,6 +4,7 @@ namespace app\widgets;
 
 
 use app\models\User;
+use app\models\UserOnline;
 use app\models\UserRecipient;
 use Yii;
 use yii\base\Widget;
@@ -34,7 +35,13 @@ class RecipientsWidget extends Widget {
                 [
                     'label' => 'Имя',
                     'content' => function ($model) {
-                        return $model->detail->nickname;
+                        $isOnline = '<span class="status offline"></span>';
+
+                        if (UserOnline::isUserOnline($model->id)) {
+                            $isOnline = '<span class="status online"></span>';
+                        }
+
+                        return $isOnline . $model->detail->nickname;
                     }
                 ],
                 'email',

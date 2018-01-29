@@ -113,3 +113,19 @@ a.desc:after {
 .nav > li > form > button.logout:focus {
     outline: none;
 }
+
+.status {
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    border-radius: 8px;
+    margin: 0 0.5em 0 0;
+}
+
+.status.online {
+    background: #28a745;
+}
+
+.status.offline {
+    background: #d9534f;
+}

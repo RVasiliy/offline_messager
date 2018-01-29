@@ -4,6 +4,7 @@ namespace app\widgets;
 
 
 use app\models\UserMessage;
+use app\models\UserOnline;
 use yii\base\Widget;
 use yii\data\ActiveDataProvider;
 use yii\grid\ActionColumn;
@@ -30,7 +31,14 @@ class OutboxWidget extends Widget {
                 [
                     'label' => 'Имя',
                     'content' => function ($model) {
-                        return $model->recipient->detail->nickname;
+                        $recipient = $model->recipient;
+                        $isOnline = '<span class="status offline"></span>';
+
+                        if (UserOnline::isUserOnline($recipient->id)) {
+                            $isOnline = '<span class="status online"></span>';
+                        }
+
+                        return $isOnline . $recipient->detail->nickname;
                     },
                 ],
                 [

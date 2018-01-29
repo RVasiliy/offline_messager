@@ -2,26 +2,20 @@
 
 namespace app\assets;
 
-use Yii;
+
 use yii\web\AssetBundle;
 
-class AppAsset extends AssetBundle {
+class MessageFormAsset extends AssetBundle {
     public $basePath = '@webroot';
     public $baseUrl = '@web';
     public $css = [
-        'css/site.css',
+        'css/message-list.css',
     ];
-    public $js = [];
-
+    public $js = [
+        'js/message-form.js',
+    ];
     public $depends = [
         'yii\web\YiiAsset',
         'yii\bootstrap\BootstrapAsset',
     ];
-
-    public function init() {
-        if (!Yii::$app->user->isGuest) {
-            $this->js[] = 'js/user-online.js';
-        }
-    }
 }
-

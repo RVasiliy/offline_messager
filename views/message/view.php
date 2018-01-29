@@ -1,10 +1,13 @@
 <?php
 
+use app\assets\MessageFormAsset;
 use yii\bootstrap\ActiveForm;
 use yii\helpers\Html;
 use yii\helpers\Url;
 
 $this->title = 'Переписка c ' . $recipient->detail->nickname;
+
+MessageFormAsset::register($this);
 ?>
 <div class="message-view">
     <h1><?= Html::encode($this->title); ?></h1>

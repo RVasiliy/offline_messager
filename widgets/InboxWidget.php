@@ -4,6 +4,7 @@ namespace app\widgets;
 
 
 use app\models\UserMessage;
+use app\models\UserOnline;
 use Yii;
 use yii\base\Widget;
 use yii\data\ActiveDataProvider;
@@ -31,7 +32,14 @@ class InboxWidget extends Widget {
                 [
                     'label' => 'Имя',
                     'content' => function ($model) {
-                        return $model->owner->detail->nickname;
+                        $owner = $model->owner;
+                        $isOnline = '<span class="status offline"></span>';
+
+                        if (UserOnline::isUserOnline($owner->id)) {
+                            $isOnline = '<span class="status online"></span>';
+                        }
+
+                        return $isOnline . $owner->detail->nickname;
                     },
                 ],
                 [
